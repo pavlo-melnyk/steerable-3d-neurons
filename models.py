@@ -68,7 +68,7 @@ class SteerableModel(nn.Module):
                         ).to(self.device).float()
         
         # We want to compute the interpolation coefficients v^k
-        # that depend on the (possibly unknown) rotation applied to the input, 
+        # that depend on the rotation applied to the input, 
         # For the proof-of-concept experiments, we assume that the parameters of this rotation,
         # i.e., self.axis_angle parameters, are known.
         # In the forward pass, we will construct a rotation matrix from the axis-angle representation
@@ -90,7 +90,7 @@ class SteerableModel(nn.Module):
         
         
         # Step 2. Transform v for each sphere with the corresponding intitial rotation and the obtained rotation R_B (possibly, optimized)
-        # as v[:3] = R_O^k @ R_B @ R_O^k.T @ v[:3], and then multiply by the basis matrix self.M (equation 12 in the paper):
+        # as v[:3] = R_O^k @ R_B @ R_O^k.T @ v[:3], and then multiply by the basis matrix self.M (equation 15 in the paper):
         vs = [] 
         for i in range(len(self.init_rotations)): # self.hidden_layer_sizes[0]) * self.n_input_points rotations
             transformation = self.init_rotations[i] @ R_B @ self.init_rotations[i].T
@@ -108,7 +108,7 @@ class SteerableModel(nn.Module):
     
     
         # Step 3. Perform the scaling of each coordinate of the input point by the corresponding interpolation coefficient
-        # (corresponding to the Kronecker product) according to the steerability constraint (13) in the paper:
+        # (corresponding to the Kronecker product) according to the steerability constraint (16) in the paper:
         
         # repeat the input n_geometric_neuron_times:
         x = x.repeat(1, self.hidden_layer_sizes[0], 1)
