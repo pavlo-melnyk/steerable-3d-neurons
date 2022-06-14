@@ -85,11 +85,11 @@ class SteerableModel(nn.Module):
     def forward(self, x):
         v = self.v # a constant 4-vector, i.e., 0.5*torch.ones(4)
         
-        # Construct an SO(3) matrix from the axis-angle (free) parameters:
+        # Construct a 3x3 rotation matrix from the axis-angle (free) parameters:
         R_B = torch_rotation_matrix(self.axis_angle).float().to(self.device)        
         
         
-        # Step 2. Transform v for each sphere with the corresponding intitial rotation and the obtained rotation R_B (possibly, optimized)
+        # Step 2. Transform v for each sphere with the corresponding intitial rotation and the obtained rotation R_B (possibly, regressed)
         # as v[:3] = R_O^k @ R_B @ R_O^k.T @ v[:3], and then multiply by the basis matrix self.M (equation 15 in the paper):
         vs = [] 
         for i in range(len(self.init_rotations)): # self.hidden_layer_sizes[0]) * self.n_input_points rotations
@@ -108,7 +108,7 @@ class SteerableModel(nn.Module):
     
     
         # Step 3. Perform the scaling of each coordinate of the input point by the corresponding interpolation coefficient
-        # (corresponding to the Kronecker product) according to the steerability constraint (16) in the paper:
+        # (one way to implement the steerability constraint (16) in the paper):
         
         # repeat the input n_geometric_neuron_times:
         x = x.repeat(1, self.hidden_layer_sizes[0], 1)
