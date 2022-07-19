@@ -6,6 +6,7 @@ The official implementation of the "Steerable 3D Spherical Neurons" paper, Proce
 
 
 ## Poster
+(best viewed as an image in a new tab)
 ![Steerable 3D Spherical Neurons](misc/poster.jpg)
 
 
