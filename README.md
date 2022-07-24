@@ -1,6 +1,6 @@
 # Steerable 3D Spherical Neurons
 
-The official implementation of the "Steerable 3D Spherical Neurons" paper, Proceedings of the 39th International Conference on Machine Learning, ICML 2022, 17-23 July, 2022
+The official implementation of the ["Steerable 3D Spherical Neurons"](https://proceedings.mlr.press/v162/melnyk22a.html) paper, Proceedings of the 39th International Conference on Machine Learning, ICML 2022, 17-23 July, 2022
 
 [[arXiv]](https://arxiv.org/abs/2106.13863) [[bibtex]](https://github.com/pavlo-melnyk/steerable-3d-neurons#citation)
 
